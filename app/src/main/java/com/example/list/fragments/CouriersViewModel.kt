@@ -10,7 +10,7 @@ class CouriersViewModel : ViewModel() {
     var couriersList: MutableLiveData<List<Couriers>> = MutableLiveData()
     private var _couriers : Couriers? = null
 
-    val group
+    val courier
         get() = _couriers
 
     init {
@@ -27,36 +27,36 @@ class CouriersViewModel : ViewModel() {
         }
     }
 
-    fun deleteGroup(){
-        if (group != null)
-            AppRepository.getInstance().deleteCourier(group!!)
+    fun deleteCourier(){
+        if (courier != null)
+            AppRepository.getInstance().deleteCourier(courier!!)
     }
 
-    fun appendGroup(groupName: String){
+    fun appendCourier(groupName: String){
         val couriers = Couriers()
         couriers.name = groupName
         couriers.companyID = company?.id!!
         AppRepository.getInstance().addCourier(couriers)
     }
 
-    fun updateGroup(groupName: String){
+    fun updateCourier(groupName: String){
         if (_couriers != null){
             _couriers!!.name = groupName
             AppRepository.getInstance().updateCourier(_couriers!!)
         }
     }
 
-    fun setCurrentGroup(position: Int){
+    fun setCurrentCourier(position: Int){
         if((couriersList.value?.size?: 0) > position)
-            couriersList.value?.let { AppRepository.getInstance().setCurrentGroup(it.get(position))}
+            couriersList.value?.let { AppRepository.getInstance().setCurrentCourier(it.get(position))}
     }
 
-    fun setCurrentGroup(couriers: Couriers){
-        AppRepository.getInstance().setCurrentGroup(couriers)
+    fun setCurrentCourier(couriers: Couriers){
+        AppRepository.getInstance().setCurrentCourier(couriers)
     }
 
     val getCurrentListPosition
-        get() = couriersList.value?.indexOfFirst{ it.id == group?.id} ?: -1
+        get() = couriersList.value?.indexOfFirst{ it.id == courier?.id} ?: -1
 
 
 

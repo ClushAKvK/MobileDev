@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 private const val CONNECT_TIMEOUT_INTERVAL_SEC = 10L
 private const val READ_TIMEOUT_INTERVAL_SEC = 10L
 private const val WRITE_TIMEOUT_INTERVAL_SEC = 10L
-private const val BASE_URL = "http://10.0.2.2:9995"
+private const val BASE_URL = "http://10.0.2.2:5551"
 //private const val BASE_URL = "http://192.168.88.49:49995"
 
 

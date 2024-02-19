@@ -16,9 +16,11 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.collection.emptyLongSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list.ApplicationList2
@@ -80,6 +82,11 @@ class OrderedFragment : Fragment() {
         viewModel.ordersList.observe(viewLifecycleOwner){
             binding.rvOrders.adapter = StudentAdapter(it)
         }
+
+        if (!ApplicationList2.isAdmin)
+            binding.fabNewOrder.isVisible = false
+
+
         binding.fabNewOrder.setOnClickListener{
             editOrder(Orders().apply { courierID = viewModel.couriers.id })
         }
@@ -181,7 +188,7 @@ class OrderedFragment : Fragment() {
                         true
                     }
                     tvHC.setOnLongClickListener{
-                        viewModel.set_Courier_ByDate(couriers)
+                        viewModel.set_Courier_ByTimeDelivery(couriers)
 
                         true
                     }
@@ -191,7 +198,7 @@ class OrderedFragment : Fragment() {
                         true
                     }
                     tvP.setOnLongClickListener{
-                        viewModel.set_Courier_ByTimeDelivery(couriers)
+                        viewModel.set_Courier_ByDate(couriers)
 
                         true
                     }
@@ -239,7 +246,7 @@ class OrderedFragment : Fragment() {
                         }
 
                     }
-                        else
+                    else
                         cl.setOnLongClickListener {
                             cl.callOnClick()
                             llb.visibility = View.INVISIBLE

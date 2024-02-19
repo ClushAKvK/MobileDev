@@ -84,18 +84,18 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             tab.text = couriersList.get(pos).name
         }.attach()
         tabPosition = 0
-        if (viewModel.group != null)
+        if (viewModel.courier != null)
             tabPosition = if (viewModel.getCurrentListPosition>=0)
                 viewModel.getCurrentListPosition
             else
                 0
-        viewModel.setCurrentGroup(tabPosition)
+        viewModel.setCurrentCourier(tabPosition)
         binding.tlCourier.selectTab(binding.tlCourier.getTabAt(tabPosition), true)
 
         binding.tlCourier.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tabPosition = tab?.position!!
-                viewModel.setCurrentGroup(couriersList[tabPosition])
+                viewModel.setCurrentCourier(couriersList[tabPosition])
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -111,7 +111,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
     }
 
     override fun update() {
-        editGroup(viewModel.group?.name?: "")
+        editGroup(viewModel.courier?.name?: "")
     }
 
     override fun delete(){
@@ -119,12 +119,12 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
     }
 
     private fun deleteDialog(){
-        if (viewModel.group == null) return
+        if (viewModel.courier == null) return
         AlertDialog.Builder(requireContext())
             .setTitle("Удаление")
-            .setMessage("Вы действительно хотите удалить курьера ${viewModel.group?.name?:""}?")
+            .setMessage("Вы действительно хотите удалить курьера ${viewModel.courier?.name?:""}?")
             .setPositiveButton("ДА"){ _, _ ->
-                viewModel.deleteGroup()
+                viewModel.deleteCourier()
             }
             .setNegativeButton("НЕТ", null)
             .setCancelable(true)
@@ -145,9 +145,9 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             .setPositiveButton("Подтверждаю"){ _, _ ->
                 if (inputString.text.isNotBlank()){
                     if (groupName.isBlank())
-                        viewModel.appendGroup(inputString.text.toString())
+                        viewModel.appendCourier(inputString.text.toString())
                     else
-                        viewModel.updateGroup(inputString.text.toString())
+                        viewModel.updateCourier(inputString.text.toString())
                 }
 
             }

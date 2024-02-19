@@ -38,7 +38,7 @@ class OrdersViewModel : ViewModel() {
     fun set_Courier_ByDate(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByDate(couriers.id).reversed())
+            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByDate(couriers.id))
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it
@@ -56,7 +56,7 @@ class OrdersViewModel : ViewModel() {
     fun set_Courier_ByTimeDelivery(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTimeDelivery(couriers.id).reversed())
+            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTimeDelivery(couriers.id))
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it

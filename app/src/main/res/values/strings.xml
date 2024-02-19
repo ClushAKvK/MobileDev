@@ -5,9 +5,9 @@
     <string name="preference_key_students_list">List.preference.key.student_list</string>
     
     <string-array name="TIME_DELIVERY">
-        <item>10 минут</item>
-        <item>30 минут</item>
-        <item>60 минут</item>
+        <item>10 мин.</item>
+        <item>30 мин.</item>
+        <item>60 мин.</item>
     </string-array>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

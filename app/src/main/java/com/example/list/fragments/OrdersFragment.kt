@@ -2,6 +2,7 @@ package com.example.list.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.list.data.Orders
+import com.example.list.myConsts
 import com.example.list.repository.AppRepository
 import com.example.list1110.R
 import com.example.list1110.databinding.FragmentOrderBinding
@@ -21,7 +23,6 @@ private const val ARG_PARAM1 = "order_param"
 
 
 class OrdersFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var orders: Orders
     private lateinit var _binding: FragmentOrderBinding
 
@@ -96,8 +97,26 @@ class OrdersFragment : Fragment() {
 
 
         binding.btnSave.setOnClickListener {
+            var flag: Boolean = true
+
+            if (binding.edAdress.text.toString().equals("")) {
+                flag = false
+                binding.edAdress.error = "Адресс должен быть указан"
+            }
+            if (binding.edHour.text.toString().equals("") || 0 > binding.edHour.text.toString().toInt() || binding.edHour.text.toString().toInt() > 23) {
+                flag = false
+                binding.edHour.error = "Часы указанны некорректно"
+            }
+            if (binding.edMinute.text.toString().equals("") || 0 > binding.edMinute.text.toString().toInt() || binding.edMinute.text.toString().toInt() > 59) {
+                flag = false
+                binding.edMinute.error = "Минуты указанны некорректно"
+            }
+
             orders.address = binding.edAdress.text.toString()
             orders.orderDetails = binding.edOrderDetails.text.toString()
+
+//            Log.d(myConsts.TAG, "!!!!!!VALUE  ${binding.edHour.text.toString().toInt()} and ${binding.edMinute.text.toString().toInt()}")
+
             orders.time = binding.edHour.text.toString() + ':' + binding.edMinute.text.toString()
             //date чуть выше
             binding.spTimeDelivery.onItemSelectedListener = object :
@@ -118,9 +137,11 @@ class OrdersFragment : Fragment() {
             orders.phone = binding.EdPhoneNumber.text.toString()
             orders.price = binding.edPrice.text.toString()
             orders.comment = binding.edComment.text.toString()
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-            AppRepository.getInstance().addOrder(orders)
 
+            if (flag) {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+                AppRepository.getInstance().addOrder(orders)
+            }
         }
 
         binding.edButton.setOnClickListener {

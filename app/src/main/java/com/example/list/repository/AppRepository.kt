@@ -72,7 +72,7 @@ class AppRepository {
         fetchCompanys()
     }
 
-    fun setCurrentGroup(_couriers:Couriers){
+    fun setCurrentCourier(_couriers:Couriers){
         couriers.postValue(_couriers)
     }
 
@@ -243,7 +243,7 @@ class AppRepository {
                     if (response.code()==200) fetchOrders()
                 }
                 override fun onFailure(call: Call<PostResult>, t:Throwable){
-                    Log.d(TAG,"Ошибка записи тура", t)
+                    Log.d(TAG,"Ошибка записи заказа", t)
                 }
             })
     }
