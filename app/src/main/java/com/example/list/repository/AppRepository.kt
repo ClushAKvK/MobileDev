@@ -69,7 +69,7 @@ class AppRepository {
     }
 
     fun loadData(){
-        fetchCompanys()
+        fetchCompanies()
     }
 
     fun setCurrentCourier(_couriers:Couriers){
@@ -111,7 +111,7 @@ class AppRepository {
 
     private var listAPI = ListConnection.getClient().create(ListAPI::class.java)
 
-    fun fetchCompanys(){
+    fun fetchCompanies(){
         listAPI.getCompanys().enqueue(object: Callback<Companies> {
             override fun onFailure(call: Call<Companies>, t :Throwable){
                 Log.d(TAG,"Ошибка получения списка служеб доставки", t)
@@ -141,7 +141,7 @@ class AppRepository {
         listAPI.postCompany(postCompany)
             .enqueue(object : Callback<PostResult> {
                 override fun onResponse(call: Call<PostResult>, response: Response<PostResult>){
-                    if (response.code()==200) fetchCompanys()
+                    if (response.code()==200) fetchCompanies()
                 }
                 override fun onFailure(call: Call<PostResult>, t: Throwable){
                     Log.d(TAG,"Ошибка записи службы доставки",t)
@@ -153,7 +153,7 @@ class AppRepository {
         listAPI.postCourier(postCouriers)
             .enqueue(object : Callback<PostResult>{
                 override fun onResponse(call:Call<PostResult>,response: Response<PostResult>){
-                    if (response.code()==200) fetchCompanys()
+                    if (response.code()==200) fetchCompanies()
                 }
                 override fun onFailure(call:Call<PostResult>,t: Throwable){
                     Log.d(TAG,"Ошибка записи службы доставки",t)

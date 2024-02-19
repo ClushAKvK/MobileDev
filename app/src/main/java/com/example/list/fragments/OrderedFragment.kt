@@ -56,14 +56,11 @@ class OrderedFragment : Fragment() {
         }
     }
 
-
-
     private lateinit var viewModel: OrdersViewModel
 
     private lateinit var _binding : FragmentOrdersBinding
     val binding
         get() = _binding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,10 +75,12 @@ class OrderedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(OrdersViewModel::class.java)
-        viewModel.set_Courier_ByAdress(couriers)
+        viewModel.set_orders_by_adress(couriers)
         viewModel.ordersList.observe(viewLifecycleOwner){
-            binding.rvOrders.adapter = StudentAdapter(it)
+            binding.rvOrders.adapter = OrdersAdapter(it)
         }
+        
+//        viewModel.set_orders_by_adress(couriers)
 
         if (!ApplicationList2.isAdmin)
             binding.fabNewOrder.isVisible = false
@@ -111,19 +110,19 @@ class OrderedFragment : Fragment() {
         (requireActivity() as MainActivityInterface).updateTitle("Курьер ${viewModel.couriers.name}")
     }
 
-    private inner class StudentAdapter(private val items: List<Orders>)
-        : RecyclerView.Adapter<StudentAdapter.ItemHolder>(){
+    private inner class OrdersAdapter(private val items: List<Orders>)
+        : RecyclerView.Adapter<OrdersAdapter.ItemHolder>(){
 
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): StudentAdapter.ItemHolder {
+        ): OrdersAdapter.ItemHolder {
             val view = layoutInflater.inflate(R.layout.element_order_list, parent, false)
             return ItemHolder(view)
         }
 
         override fun getItemCount(): Int = items.size
-        override fun onBindViewHolder(holder: StudentAdapter.ItemHolder, position: Int) {
+        override fun onBindViewHolder(holder: OrdersAdapter.ItemHolder, position: Int) {
             holder.bind(viewModel.ordersList.value!![position])
         }
         private var lastView : View? = null
@@ -183,22 +182,22 @@ class OrderedFragment : Fragment() {
 
                     
                     tvTN.setOnLongClickListener{
-                        viewModel.set_Courier_ByAdress(couriers)
+                        viewModel.set_orders_by_adress(couriers)
 
                         true
                     }
                     tvHC.setOnLongClickListener{
-                        viewModel.set_Courier_ByTimeDelivery(couriers)
+                        viewModel.set_orders_by_time_delivery(couriers)
 
                         true
                     }
                     tvD.setOnLongClickListener{
-                        viewModel.set_Courier_ByTime(couriers)
+                        viewModel.set_orders_by_time(couriers)
 
                         true
                     }
                     tvP.setOnLongClickListener{
-                        viewModel.set_Courier_ByDate(couriers)
+                        viewModel.set_orders_by_date(couriers)
 
                         true
                     }
@@ -324,7 +323,6 @@ class OrderedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(OrdersViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

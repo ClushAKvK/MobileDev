@@ -54,6 +54,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
         ma.updateTitle("Служба доставки \"${viewModel.company?.name}\"")
 
         viewModel.couriersList.observe(viewLifecycleOwner){
+            //createUI(listOf())
             createUI(it)
         }
     }
@@ -107,11 +108,11 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
     }
 
     override fun append() {
-        editGroup()
+        editCourier()
     }
 
     override fun update() {
-        editGroup(viewModel.courier?.name?: "")
+        editCourier(viewModel.courier?.name?: "")
     }
 
     override fun delete(){
@@ -132,11 +133,11 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             .show()
     }
 
-    private fun editGroup(groupName: String = ""){
+    private fun editCourier(courierName: String = ""){
         val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_input_name, null)
         val messageText = mDialogView.findViewById<TextView>(R.id.tvInfo)
         val inputString = mDialogView.findViewById<TextView>(R.id.etInput)
-        inputString.setText(groupName)
+        inputString.setText(courierName)
         messageText.text = "Укажите наименование курьера"
 
         android.app.AlertDialog.Builder(requireContext())
@@ -144,7 +145,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             .setView(mDialogView)
             .setPositiveButton("Подтверждаю"){ _, _ ->
                 if (inputString.text.isNotBlank()){
-                    if (groupName.isBlank())
+                    if (courierName.isBlank())
                         viewModel.appendCourier(inputString.text.toString())
                     else
                         viewModel.updateCourier(inputString.text.toString())
@@ -157,7 +158,6 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             .show()
 
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

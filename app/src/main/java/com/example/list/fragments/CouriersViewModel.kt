@@ -32,16 +32,16 @@ class CouriersViewModel : ViewModel() {
             AppRepository.getInstance().deleteCourier(courier!!)
     }
 
-    fun appendCourier(groupName: String){
+    fun appendCourier(courierName: String){
         val couriers = Couriers()
-        couriers.name = groupName
+        couriers.name = courierName
         couriers.companyID = company?.id!!
         AppRepository.getInstance().addCourier(couriers)
     }
 
-    fun updateCourier(groupName: String){
+    fun updateCourier(courierName: String){
         if (_couriers != null){
-            _couriers!!.name = groupName
+            _couriers!!.name = courierName
             AppRepository.getInstance().updateCourier(_couriers!!)
         }
     }

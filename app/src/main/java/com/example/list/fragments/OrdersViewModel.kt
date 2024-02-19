@@ -15,7 +15,7 @@ class OrdersViewModel : ViewModel() {
     var ordersList: MutableLiveData<List<Orders>> = MutableLiveData()
 
     var _orders: Orders?= null
-    var isTvTNTapped: Boolean = false
+//    var isTvTNTapped: Boolean = false
 
     val order
         get()=_orders
@@ -23,8 +23,7 @@ class OrdersViewModel : ViewModel() {
     lateinit var couriers: Couriers
 
 
-
-    fun set_Courier_ByAdress(couriers: Couriers){
+    fun set_orders_by_adress(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
             ordersList.postValue(AppRepository.getInstance().getCourierOrdersByAdress(couriers.id))
@@ -34,8 +33,7 @@ class OrdersViewModel : ViewModel() {
         }
     }
 
-    ////////////////////////////////////////////////////////
-    fun set_Courier_ByDate(couriers: Couriers){
+    fun set_orders_by_date(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
             ordersList.postValue(AppRepository.getInstance().getCourierOrdersByDate(couriers.id))
@@ -44,7 +42,8 @@ class OrdersViewModel : ViewModel() {
             _orders = it
         }
     }
-    fun set_Courier_ByTime(couriers: Couriers){
+
+    fun set_orders_by_time(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
             ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTime(couriers.id))
@@ -53,7 +52,8 @@ class OrdersViewModel : ViewModel() {
             _orders = it
         }
     }
-    fun set_Courier_ByTimeDelivery(couriers: Couriers){
+
+    fun set_orders_by_time_delivery(couriers: Couriers){
         this.couriers = couriers
         AppRepository.getInstance().listOfOrders.observeForever {
             ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTimeDelivery(couriers.id))

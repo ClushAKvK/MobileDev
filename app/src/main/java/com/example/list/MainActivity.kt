@@ -21,33 +21,36 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
         fun update()
         fun delete()
     }
+
     private lateinit var viewModel: OrdersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        onBackPressedDispatcher.addCallback(this ){
-            if (supportFragmentManager.backStackEntryCount > 0){
+        onBackPressedDispatcher.addCallback(this ) {
+            if (supportFragmentManager.backStackEntryCount > 0) {
                 supportFragmentManager.popBackStack()
-                when (activeFragment){
-                    NamesOfFragment.COMPANY ->{
+                when (activeFragment) {
+                    NamesOfFragment.COMPANY -> {
                         finish()
                     }
-                    NamesOfFragment.COURIERS ->{
+                    NamesOfFragment.COURIERS -> {
                         activeFragment=NamesOfFragment.COMPANY
                     }
-                    NamesOfFragment.ORDERS ->{
+                    NamesOfFragment.ORDERS -> {
                         activeFragment = NamesOfFragment.COURIERS
                     }
-                    NamesOfFragment.LOGIN->{
+                    NamesOfFragment.LOGIN-> {
                         activeFragment=NamesOfFragment.COMPANY
+//                        updateMenu(activeFragment)
                     }
                     else -> {}
                 }
                 updateMenu(activeFragment)
             }
-            else{
+            else {
+//                updateMenu(NamesOfFragment.COMPANY)
                 finish()
             }
         }
@@ -96,7 +99,8 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
                 fragmentType == NamesOfFragment.COURIERS && ApplicationList2.isAdmin)
 
         _miLogin?.isVisible = (
-                fragmentType == NamesOfFragment.COMPANY && !ApplicationList2.isAdmin)
+                !ApplicationList2.isAdmin)
+        _miExit?.isVisible = ApplicationList2.isAdmin
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean{
@@ -156,6 +160,7 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
             NamesOfFragment.COMPANY -> {
                 supportFragmentManager
                     .beginTransaction()
+//                    .replace(R.id.fcMain, CompanyFragment.getInstance())
                     .replace(R.id.fcMain, CompanyFragment.getInstance())
                     .addToBackStack(null)
                     .commit()
@@ -163,7 +168,8 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
             NamesOfFragment.COURIERS -> {
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fcMain, CouriersFragment.getInstance())
+//                    .replace(R.id.fcMain, CouriersFragment.getInstance())
+                    .replace(R.id.fcMain, CouriersFragment.newInstance())
                     .addToBackStack(null)
                     .commit()
             }
