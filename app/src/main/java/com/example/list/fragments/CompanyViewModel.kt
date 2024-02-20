@@ -12,7 +12,7 @@ import com.example.list.repository.AppRepository
 
 class CompanyViewModel : ViewModel() {
 
-var companyList : LiveData<List<Company>> = AppRepository.getInstance().listOfCompany
+    var companyList : LiveData<List<Company>> = AppRepository.getInstance().listOfCompany
     private var _company: Company? = null
     val company
         get() = _company
@@ -24,18 +24,18 @@ var companyList : LiveData<List<Company>> = AppRepository.getInstance().listOfCo
         }
     }
 
-    fun deleteFaculty(){
+    fun deleteCompany(){
         if (company!=null)
             AppRepository.getInstance().deleteCompany(company!!)
     }
 
-    fun appendFaculty(facultyName: String){
+    fun appendCompany(facultyName: String){
         val company = Company()
         company.name = facultyName
         AppRepository.getInstance().addCompany(company)
     }
 
-    fun updateFaculty(facultyName: String){
+    fun updateCompany(facultyName: String){
         if (_company!=null){
             _company!!.name=facultyName
             AppRepository.getInstance().updateCompany(_company!!)
@@ -44,7 +44,7 @@ var companyList : LiveData<List<Company>> = AppRepository.getInstance().listOfCo
 
 
 
-    fun setFaculty(company:Company){
+    fun setCompany(company:Company){
         AppRepository.getInstance().setCurrentCompany(company)
 
     }

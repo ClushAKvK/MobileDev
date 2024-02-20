@@ -99,7 +99,6 @@ class AppRepository {
     /////////////////////////////////////////////////////////////////////
 
 
-    /////////////////////////////////////////////////////////////////////
     private val listDB by lazy { OfflineDBRepository(ListDatabase.getDatabase(ApplicationList2.context).listDAO()) }
 
     private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
@@ -259,7 +258,8 @@ class AppRepository {
     fun updateOrder(orders: Orders){
         updateOrders(PostOrders(UPDATE_ORDER,orders))
     }
-    /////////////////////////////////////////////////////////////////////
+
+
     private fun registrationQuery(user: User) {
         listAPI.registration(user)
             .enqueue(object : Callback<PostResult>{

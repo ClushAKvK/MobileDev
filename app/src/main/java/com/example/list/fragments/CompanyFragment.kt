@@ -94,7 +94,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
                     val tv = itemView.findViewById<TextView>(R.id.tvCompany)
                     tv.text= company.name
                     tv.setOnClickListener{
-                        viewModel.setFaculty(company)
+                        viewModel.setCompany(company)
                         updateCurrentView(itemView)
                     }
 
@@ -126,7 +126,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
             .setTitle("Удаление")
             .setMessage("Вы действительно хоитите удалить службу доставки ${viewModel.company?.name?: ""}?")
             .setPositiveButton("Да"){_,_ ->
-                viewModel.deleteFaculty()
+                viewModel.deleteCompany()
             }
             .setNegativeButton("Нет",null)
             .setCancelable(true)
@@ -147,9 +147,9 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
             .setPositiveButton("Подтверждаю"){_,_ ->
                if (inputString.text.isNotBlank()){
                    if (companyName.isBlank())
-                       viewModel.appendFaculty(inputString.text.toString())
+                       viewModel.appendCompany(inputString.text.toString())
                    else
-                       viewModel.updateFaculty(inputString.text.toString())
+                       viewModel.updateCompany(inputString.text.toString())
                }
             }
             .setNegativeButton("Отмена",null)

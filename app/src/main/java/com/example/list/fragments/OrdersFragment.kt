@@ -145,6 +145,21 @@ class OrdersFragment : Fragment() {
         }
 
         binding.edButton.setOnClickListener {
+            var flag: Boolean = true
+
+            if (binding.edAdress.text.toString().equals("")) {
+                flag = false
+                binding.edAdress.error = "Адресс должен быть указан"
+            }
+            if (binding.edHour.text.toString().equals("") || 0 > binding.edHour.text.toString().toInt() || binding.edHour.text.toString().toInt() > 23) {
+                flag = false
+                binding.edHour.error = "Часы указанны некорректно"
+            }
+            if (binding.edMinute.text.toString().equals("") || 0 > binding.edMinute.text.toString().toInt() || binding.edMinute.text.toString().toInt() > 59) {
+                flag = false
+                binding.edMinute.error = "Минуты указанны некорректно"
+            }
+
             orders.address = binding.edAdress.text.toString()
             orders.orderDetails = binding.edOrderDetails.text.toString()
             orders.time = binding.edHour.text.toString() + ':' + binding.edMinute.text.toString()
@@ -167,9 +182,11 @@ class OrdersFragment : Fragment() {
             orders.phone = binding.EdPhoneNumber.text.toString()
             orders.price = binding.edPrice.text.toString()
             orders.comment = binding.edComment.text.toString()
-            AppRepository.getInstance().updateOrder(orders)
-            requireActivity().onBackPressedDispatcher.onBackPressed()
 
+            if (flag) {
+                AppRepository.getInstance().updateOrder(orders)
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
         return binding.root
 
