@@ -95,7 +95,7 @@ class OrderedFragment : Fragment() {
     private fun deleteDialog(){
         AlertDialog.Builder(requireContext())
             .setTitle("Удаление")
-            .setMessage("Вы действительно хотите удалить накладную?")
+            .setMessage("Вы действительно хотите удалить заказ?")
             .setPositiveButton("Да"){_, _ ->
                 viewModel.deleteOrder()
             }
@@ -107,7 +107,8 @@ class OrderedFragment : Fragment() {
 
     private fun editOrder(orders: Orders){
         (requireActivity() as MainActivityInterface).showFragment(NamesOfFragment.ORDERS, orders)
-        (requireActivity() as MainActivityInterface).updateTitle("Курьер ${viewModel.couriers.name}")
+//        (requireActivity() as MainActivityInterface).updateTitle("Курьер ${viewModel.couriers.name}")
+        (requireActivity() as MainActivityInterface).updateTitle("Заказ ${viewModel.order?.id}")
     }
 
     private inner class OrdersAdapter(private val items: List<Orders>)

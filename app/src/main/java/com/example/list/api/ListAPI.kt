@@ -15,12 +15,12 @@ import retrofit2.http.Query
 const val APPEND_COMPANY = 11
 const val UPDATE_COMPANY = 12
 const val DELETE_COMPANY = 13
-const val APPEND_MAKERS = 21
-const val UPDATE_MAKERS = 22
-const val DELETE_MAKERS = 23
-const val APPEND_DOCUMENTS = 31
-const val UPDATE_DOCUMENTS = 32
-const val DELETE_DOCUMENTS = 33
+const val APPEND_COURIER = 21
+const val UPDATE_COURIER = 22
+const val DELETE_COURIER = 23
+const val APPEND_ORDER = 31
+const val UPDATE_ORDER = 32
+const val DELETE_ORDER = 33
 
 interface ListAPI{
     @GET("code=10")

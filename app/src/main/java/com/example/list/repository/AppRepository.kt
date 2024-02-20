@@ -9,11 +9,11 @@ import androidx.preference.PreferenceManager
 
 import com.example.list.ApplicationList2
 import com.example.list.api.APPEND_COMPANY
-import com.example.list.api.APPEND_MAKERS
-import com.example.list.api.APPEND_DOCUMENTS
+import com.example.list.api.APPEND_COURIER
+import com.example.list.api.APPEND_ORDER
 import com.example.list.api.DELETE_COMPANY
-import com.example.list.api.DELETE_MAKERS
-import com.example.list.api.DELETE_DOCUMENTS
+import com.example.list.api.DELETE_COURIER
+import com.example.list.api.DELETE_ORDER
 import com.example.list.api.ListAPI
 import com.example.list.api.ListConnection
 import com.example.list.api.PostCompany
@@ -21,8 +21,8 @@ import com.example.list.api.PostResult
 import com.example.list.api.PostCouriers
 import com.example.list.api.PostOrders
 import com.example.list.api.UPDATE_COMPANY
-import com.example.list.api.UPDATE_MAKERS
-import com.example.list.api.UPDATE_DOCUMENTS
+import com.example.list.api.UPDATE_COURIER
+import com.example.list.api.UPDATE_ORDER
 
 import com.example.list.data.Company
 import com.example.list.data.Companies
@@ -200,15 +200,15 @@ class AppRepository {
     }
 
     fun addCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(APPEND_MAKERS, couriers))
+        updateCouriers(PostCouriers(APPEND_COURIER, couriers))
     }
 
     fun updateCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(UPDATE_MAKERS, couriers))
+        updateCouriers(PostCouriers(UPDATE_COURIER, couriers))
     }
 
     fun deleteCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(DELETE_MAKERS, couriers))
+        updateCouriers(PostCouriers(DELETE_COURIER, couriers))
     }
 
 
@@ -249,15 +249,15 @@ class AppRepository {
     }
 
     fun addOrder(orders: Orders){
-        updateOrders(PostOrders(APPEND_DOCUMENTS, orders))
+        updateOrders(PostOrders(APPEND_ORDER, orders))
     }
 
     fun deleteOrder(orders: Orders){
-        updateOrders(PostOrders(DELETE_DOCUMENTS,orders))
+        updateOrders(PostOrders(DELETE_ORDER,orders))
     }
 
     fun updateOrder(orders: Orders){
-        updateOrders(PostOrders(UPDATE_DOCUMENTS,orders))
+        updateOrders(PostOrders(UPDATE_ORDER,orders))
     }
     /////////////////////////////////////////////////////////////////////
     private fun registrationQuery(user: User) {
